@@ -30,7 +30,17 @@
     docker-compose up -d
     ```
 
-3. Run the Scala backend (via sbt or your preferred IDE).
+3. Run the Scala backend with sbt:
+   ```bash
+   sbt run
+   ```
+
+#### Routes
+
+1. POST /users
+   ```bash
+   curl -i -X POST http://localhost:8080/users -H "Content-Type: application/json" -d "{\"username\":\"emma22\"}"
+   ```
 
 ### Frontend
 

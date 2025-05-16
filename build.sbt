@@ -6,3 +6,14 @@ lazy val root = (project in file("."))
   .settings(
     name := "wortschatzkiste-backend"
   )
+
+libraryDependencies ++= Seq(
+  "org.typelevel" %% "cats-effect" % "3.6.1",
+  "org.http4s" %% "http4s-blaze-server" % "0.23.17",
+  "org.http4s" %% "http4s-dsl" % "0.23.17",
+  "org.http4s" %% "http4s-circe" % "0.23.17",
+  "io.circe" %% "circe-generic" % "0.14.13",
+  "org.tpolecat" %% "doobie-core" % "1.0.0-RC9",
+  "org.tpolecat" %% "doobie-hikari" % "1.0.0-RC9",
+  "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC9"
+)
