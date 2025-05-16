@@ -15,5 +15,11 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-generic" % "0.14.13",
   "org.tpolecat" %% "doobie-core" % "1.0.0-RC9",
   "org.tpolecat" %% "doobie-hikari" % "1.0.0-RC9",
-  "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC9"
+  "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC9",
+  "org.slf4j" % "slf4j-simple" % "2.0.13"
+
 )
+
+scalacOptions += "-Wnonunit-statement"
+
+Compile / run / fork := true
