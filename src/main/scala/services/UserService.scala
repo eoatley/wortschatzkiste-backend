@@ -1,9 +1,9 @@
-package service
+package services
 
 import cats.effect._
 import doobie._
 import doobie.implicits._
-import model.User
+import models.User
 
 class UserService(xa: Transactor[IO]):
   def createUser(user: User): IO[Unit] =

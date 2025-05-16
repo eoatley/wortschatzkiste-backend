@@ -6,8 +6,8 @@ import org.http4s.dsl.io._
 import org.http4s.circe._
 import io.circe.generic.auto._
 import org.http4s.HttpRoutes
-import model.User
-import service.UserService
+import models.User
+import services.UserService
 
 object UserRoutes:
   def routes(service: UserService): HttpRoutes[IO] =

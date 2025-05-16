@@ -22,7 +22,7 @@ object Main extends IOApp:
 
   override def run(args: List[String]): IO[ExitCode] =
     createTransactor.use { xa =>
-      val userService = new service.UserService(xa)
+      val userService = new services.UserService(xa)
       val routes = UserRoutes.routes(userService)
 
       BlazeServerBuilder[IO]
