@@ -3,25 +3,26 @@ import org.http4s.blaze.server.BlazeServerBuilder
 import routes.UserRoutes
 import doobie._
 import doobie.hikari.HikariTransactor
-import scala.concurrent.ExecutionContext
+import com.zaxxer.hikari.HikariConfig
 
 object Main extends IOApp:
 
-  def createTransactor: Resource[IO, HikariTransactor[IO]] =
-    for
-      ce <- Resource.eval(IO.executionContext)
-      xa <- HikariTransactor.newHikariTransactor[IO](
-        "org.postgresql.Driver",
-        "jdbc:postgresql://localhost:5432/wortschatzkiste",
-        "postgres",
-        "postgres",
-        ce
-      )
-    yield xa
+  val transactor: Resource[IO, HikariTransactor[IO]] =
+    for {
+      hikariConfig <- Resource.pure {
+        val config = new HikariConfig()
+        config.setDriverClassName("org.postgresql.Driver")
+        config.setJdbcUrl("jdbc:postgresql://localhost:5432/wortschatzkiste")
+        config.setUsername("postgres")
+        config.setPassword("postgres")
+        config
+      }
+      xa <- HikariTransactor.fromHikariConfig[IO](hikariConfig)
+    } yield xa
 
 
-  override def run(args: List[String]): IO[ExitCode] =
-    createTransactor.use { xa =>
+  def run(args: List[String]): IO[ExitCode] =
+    transactor.use { xa =>
       val userService = new services.UserService(xa)
       val routes = UserRoutes.routes(userService)
 
