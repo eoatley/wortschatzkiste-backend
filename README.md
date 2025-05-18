@@ -40,7 +40,7 @@
    ```
 1. POST /login
    ```bash
-   curl -i -X POST http://localhost:8080/users -H "Content-Type: application/json" -d "{\"username\":\"emma22\"}"
+   curl -i -X POST http://localhost:8080/login -H "Content-Type: application/json" -d "{\"username\":\"emma22\"}"
    ```
 
 ### Frontend
