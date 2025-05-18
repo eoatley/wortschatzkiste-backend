@@ -1,6 +1,6 @@
 # WortSchatzKiste Backend 🧠📚
 
-**WortSchatzKiste** (German for "word treasure chest" or "vocabulary chest") is a playful and educational web app to help users learn German vocabulary through dictionary lookups and spaced repetition games.
+**WortSchatzKiste** (German for "word treasure chest" or "vocabulary chest") will be a playful and educational web app to help users learn German vocabulary through dictionary lookups and spaced repetition games.
 
 ---
 
@@ -10,9 +10,6 @@
 - 🧠 Searched words are automatically saved to your personal vocabulary list
 - 🎮 Practice learned words using games based on spaced repetition
 - 👤 Create a user profile with a username
-- 🌐 Frontend: TypeScript + React
-- 🔧 Backend: Scala 3 using Tapir
-- 🗄️ Persistent storage with PostgreSQL
 
 ---
 
@@ -41,6 +38,10 @@
    ```bash
    curl -i -X POST http://localhost:8080/users -H "Content-Type: application/json" -d "{\"username\":\"emma22\"}"
    ```
+1. POST /login
+   ```bash
+   curl -i -X POST http://localhost:8080/users -H "Content-Type: application/json" -d "{\"username\":\"emma22\"}"
+   ```
 
 ### Frontend
 
@@ -50,7 +51,7 @@ Coming soon...
 
 ## 🛠️ Tech Stack
 
-- **Backend**: Scala 3, Tapir, Doobie, PostgreSQL
+- **Backend**: Scala 3, http4s, Cats Effect, Doobie, PostgreSQL
 - **Frontend**: React, TypeScript
 - **Deployment**: TBC
 
