@@ -20,3 +20,14 @@ object UserRoutes:
           _    <- service.createUser(user)
           res  <- Created()
         yield res
+      case req@POST -> Root / "login" =>
+        for {
+          user <- req.as[User]
+          existingUser <- service.findUserByUsername(user.username)
+          res <- existingUser match {
+            case Some(u: User) =>
+              Ok(s"Logged in successfully as ${u.username} with id ${u.id.getOrElse("unknown")}. Use this id as your token for future requests.")
+            case None =>
+              Forbidden("User not found")
+          }
+        } yield res
