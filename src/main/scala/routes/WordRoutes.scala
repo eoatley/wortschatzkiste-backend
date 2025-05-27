@@ -16,13 +16,16 @@ object WordRoutes {
       =>
         req.params.get("german") match {
           case Some(german) =>
-            for {
-              english <- service.translate(german)
-              res <- Ok(english.asJson)
-            } yield res
+            service.translate(german).flatMap { english =>
+              Ok(english.asJson)
+            }.handleErrorWith { e =>
+              IO.println(s"[ERROR] Translation failed: ${e.getMessage}") *>
+                InternalServerError("Translation failed")
+            }
           case None =>
             BadRequest("Missing query parameter: german")
         }
     }
 
 }
+
