@@ -1,6 +1,6 @@
 package services
 
-import cats.effect.*
+import cats.effect._
 import client.WiktionaryClient
 import models.Word
 import repository.DoobieWordRepository
