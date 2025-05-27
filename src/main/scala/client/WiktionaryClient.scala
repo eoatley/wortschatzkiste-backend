@@ -9,6 +9,8 @@ import io.circe.generic.auto._
 import org.apache.commons.text.StringEscapeUtils
 import org.jsoup.Jsoup
 
+import java.net.URLEncoder
+
 class WiktionaryClient(client: Client[IO]):
 
   case class Definition(definition: String)
@@ -16,7 +18,8 @@ class WiktionaryClient(client: Client[IO]):
   case class WiktionaryResponse(de: List[Entry])
 
   def fetch(word: String): IO[String] =
-    val url = Uri.unsafeFromString(s"https://en.wiktionary.org/api/rest_v1/page/definition/$word")
+    val encoded = URLEncoder.encode(word, "UTF-8")
+    val url = Uri.unsafeFromString(s"https://en.wiktionary.org/api/rest_v1/page/definition/$encoded")
     client.expect[String](url).flatMap { rawJson =>
       decode[WiktionaryResponse](rawJson) match {
         case Right(parsed) =>
